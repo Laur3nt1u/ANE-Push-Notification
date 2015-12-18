@@ -134,18 +134,25 @@ public class CreateNotificationTask extends AsyncTask<Void, Void, Boolean>
 		
 		// Notification texts
 		CharSequence contentTitle = _intent.getStringExtra("contentTitle");
-		if (contentTitle.length() > 22)
-		{
-			contentTitle = contentTitle.subSequence(0, 20) + "...";
-		}
+		if(contentTitle == null)
+			contentTitle = "";
+		else
+			if (contentTitle.length() > 22)
+				contentTitle = contentTitle.subSequence(0, 20) + "...";
+
 		CharSequence contentText = _intent.getStringExtra("contentText");
+		if(contentText == null)
+			contentText = "";
+
 		CharSequence tickerText = _intent.getStringExtra("tickerText");
-		
+		if(tickerText == null)
+			tickerText = "";
+
 		String largeIconResourceId = _intent.getStringExtra("largeIconResourceId");
 		
 		// Notification images
 		int smallIconId = Resources.getResourseIdByName(_context.getPackageName(), "drawable", "status_icon");
-		int largeIconId = Resources.getResourseIdByName(_context.getPackageName(), "drawable", "app_icon");
+		int largeIconId = Resources.getResourseIdByName(_context.getPackageName(), "drawable", "icon");
 		if (largeIconResourceId != null)
 		{
 			largeIconId = Resources.getResourseIdByName(_context.getPackageName(), "drawable", largeIconResourceId);
@@ -191,7 +198,7 @@ public class CreateNotificationTask extends AsyncTask<Void, Void, Boolean>
 			.setSound(soundUri, AudioManager.STREAM_NOTIFICATION)
 			.setWhen(System.currentTimeMillis())
 			.setAutoCancel(true)
-			.setColor(0xFF2DA9F9)
+			//.setColor(0xFF2DA9F9)
 			.setContentIntent(contentIntent);
 		
 		Notification notification = builder.build();

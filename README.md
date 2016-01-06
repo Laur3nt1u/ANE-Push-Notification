@@ -15,6 +15,20 @@ Installation
 
 If your app is iOS-only, you can directly use the binary located in the *bin* folder (AirPushNotification.ane). You should add it to your application project's Build Path and make sure to package it with your app (more information [here](http://help.adobe.com/en_US/air/build/WS597e5dadb9cc1e0253f7d2fc1311b491071-8000.html)).
 
+You should also update your manifest to add entitlements:
+```
+	<iPhone>
+	  	<Entitlements>
+			<![CDATA[ 
+				<key>aps-environment</key>
+					<string>production</string> or <string>development</string>
+			]]>
+		</Entitlements>
+		.....
+		....
+  	</iPhone>  
+```
+
 If your app supports Android, you need to compile the ANE with your own assets (status bar icon etc...). To do that, use the ant build script located in the *build* folder (build.xml):
 
 ```xml
